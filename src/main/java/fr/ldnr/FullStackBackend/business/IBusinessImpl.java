@@ -3,12 +3,15 @@ package fr.ldnr.FullStackBackend.business;
 import fr.ldnr.FullStackBackend.dao.CityRepository;
 import fr.ldnr.FullStackBackend.dao.HotelRepository;
 import fr.ldnr.FullStackBackend.entities.City;
+import fr.ldnr.FullStackBackend.entities.CityDTO;
 import fr.ldnr.FullStackBackend.entities.Hotel;
+import fr.ldnr.FullStackBackend.mapper.CityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class IBusinessImpl implements IBusiness {
@@ -29,6 +32,12 @@ public class IBusinessImpl implements IBusiness {
     @Override
     public City saveCity(City city) { return cityRepository.save(city); }
 
+    @Override
+    public CityDTO saveCityDTO(CityDTO cityDTO) {
+        City city = cityRepository.save(CityMapper.mapToEntity(cityDTO));
+        return CityMapper.mapToDto(city);
+    }
+
     /**
      * Supprime une ville du référentiel par son identifiant.
      * @param id l'identifiant de la ville à supprimer
@@ -41,7 +50,12 @@ public class IBusinessImpl implements IBusiness {
      * @return une liste de toutes les villes
      */
     @Override
-    public List<City> getAllCity() { return cityRepository.findAll(); }
+    public List<CityDTO> getAllCity() {
+        return cityRepository.findAll()
+                .stream()
+                .map(CityMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
 
     /**
      * Sauvegarde un nouvel hôtel ou met à jour un hôtel existant dans le référentiel.

@@ -1,9 +1,6 @@
 package fr.ldnr.FullStackBackend;
 
-import fr.ldnr.FullStackBackend.business.IBusiness;
 import fr.ldnr.FullStackBackend.business.IBusinessImpl;
-import fr.ldnr.FullStackBackend.dao.CityRepository;
-import fr.ldnr.FullStackBackend.dao.HotelRepository;
 import fr.ldnr.FullStackBackend.entities.City;
 import fr.ldnr.FullStackBackend.entities.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;

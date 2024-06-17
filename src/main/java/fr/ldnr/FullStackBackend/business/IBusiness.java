@@ -1,6 +1,7 @@
 package fr.ldnr.FullStackBackend.business;
 
 import fr.ldnr.FullStackBackend.entities.City;
+import fr.ldnr.FullStackBackend.entities.CityDTO;
 import fr.ldnr.FullStackBackend.entities.Hotel;
 
 import java.util.List;
@@ -10,8 +11,9 @@ public interface IBusiness {
 
     //CITY
     City saveCity(City city);
+    CityDTO saveCityDTO(CityDTO cityDTO);
     void deleteCity(Long id);
-    List<City> getAllCity();
+    List<CityDTO> getAllCity();
 
     //HOTEL
     Hotel saveHotel (Hotel hotel);

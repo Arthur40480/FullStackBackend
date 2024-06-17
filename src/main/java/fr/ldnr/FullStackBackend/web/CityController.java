@@ -2,6 +2,7 @@ package fr.ldnr.FullStackBackend.web;
 
 import fr.ldnr.FullStackBackend.business.IBusinessImpl;
 import fr.ldnr.FullStackBackend.entities.City;
+import fr.ldnr.FullStackBackend.entities.CityDTO;
 import fr.ldnr.FullStackBackend.entities.Hotel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,22 +29,22 @@ public class CityController {
      * @return Liste de toutes les villes.
      */
     @GetMapping("/city")
-    public List<City> getAllCity() {
+    public List<CityDTO> getAllCity() {
         logger.info("Récupération de toutes les villes");
         return iBusiness.getAllCity();
     }
 
     /**
      * Enregistre une nouvelle ville.
-     * @param city La ville à enregistrer.
+     * @param cityDTO Le DTO CityDTO représentant la ville à enregistrer.
      * @return ResponseEntity contenant la ville créée et l'URI de localisation.
      */
     @PostMapping("/city")
-    public ResponseEntity<City> saveCity(@RequestBody City city) {
-        City cityCreated = iBusiness.saveCity(city);
+    public ResponseEntity<CityDTO> saveCity(@RequestBody CityDTO cityDTO) {
+        CityDTO cityCreated = iBusiness.saveCityDTO(cityDTO);
 
         if (Objects.isNull(cityCreated)) {
-            logger.warn("La ville n'a pas été enregistrée correctement : {}", city);
+            logger.warn("La ville n'a pas été enregistrée correctement : {}", cityDTO);
             return ResponseEntity.noContent().build();
         }
 

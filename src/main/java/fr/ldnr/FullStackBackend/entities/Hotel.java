@@ -17,10 +17,12 @@ public class Hotel {
     private Long id;
 
     private String name;
+    private String description;
     private String phoneNumber;
     private String adress;
     private int rating;
     private int roomAvailability;
+    private int review;
     private double lowestRoomPrice;
     private String img;
 

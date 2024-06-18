@@ -28,7 +28,7 @@ public class CityController {
      * Récupère la liste de toutes les villes.
      * @return Liste de toutes les villes.
      */
-    @GetMapping("/city")
+    @GetMapping("/cities")
     public List<CityDTO> getAllCity() {
         logger.info("Récupération de toutes les villes");
         return iBusiness.getAllCity();

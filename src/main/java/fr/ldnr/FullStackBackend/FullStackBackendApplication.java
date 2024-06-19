@@ -84,6 +84,9 @@ public class FullStackBackendApplication implements CommandLineRunner {
 		accountService.addRoleToUser("pierre", "USER");
 		accountService.addRoleToUser("pascale", "USER");
 		accountService.addRoleToUser("rogenka", "USER");
+		accountService.addRoleToUser("pierre", "HOTEL_MANAGER");
+		accountService.addRoleToUser("pascale", "HOTEL_MANAGER");
+		accountService.addRoleToUser("rogenka", "HOTEL_MANAGER");
 
 	}
 }

@@ -33,6 +33,11 @@ public class HotelController {
         return iBusiness.getAllHotel();
     }
 
+    @GetMapping("/manager/{id}/hotels")
+    public List<Hotel> getHotelsByManager(@PathVariable("id") Long id) {
+        return iBusiness.getHotelsByManagerId(id);
+    }
+
     /**
      * Récupère la liste des hôtels pour une ville donnée.
      * @param id ID de la ville pour laquelle récupérer les hôtels.

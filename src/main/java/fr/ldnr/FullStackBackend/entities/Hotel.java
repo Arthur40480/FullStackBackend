@@ -1,10 +1,13 @@
 package fr.ldnr.FullStackBackend.entities;
 
+import fr.ldnr.FullStackBackend.security.entities.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +32,7 @@ public class Hotel {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    @ManyToMany(mappedBy = "managedHotels")
+    private Collection<AppUser> managers = new ArrayList<>();
 }

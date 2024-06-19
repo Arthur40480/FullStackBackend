@@ -22,5 +22,6 @@ public interface IBusiness {
     void deleteHotel(Long id);
     List<Hotel> getAllHotel();
     List<Hotel> getHotelByCity(Long id);
+    public List<Hotel> getHotelsByManagerId(Long id);
     Optional<Hotel> getHotelById(Long id);
 }

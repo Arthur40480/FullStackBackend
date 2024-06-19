@@ -1,6 +1,8 @@
 package fr.ldnr.FullStackBackend.security.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.ldnr.FullStackBackend.entities.Hotel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +30,14 @@ public class AppUser {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> roles = new ArrayList<>();
+
+    @ManyToMany
+    @ToString.Exclude
+    @JsonIgnore
+    @JoinTable(
+            name = "user_hotels",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "hotel_id")
+    )
+    private Collection<Hotel> managedHotels = new ArrayList<>();
 }

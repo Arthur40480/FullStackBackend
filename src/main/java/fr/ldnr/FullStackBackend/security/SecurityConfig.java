@@ -51,7 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/hotels").permitAll()
                 .antMatchers(HttpMethod.GET,"/hotels/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/hotel/{id}").permitAll()
-                .antMatchers(HttpMethod.GET,"/cities").permitAll();
+                .antMatchers(HttpMethod.GET,"/cities").permitAll()
+                .antMatchers(HttpMethod.GET,"//manager/{id}/hotels").permitAll();
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));

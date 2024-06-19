@@ -102,6 +102,11 @@ public class IBusinessImpl implements IBusiness {
         return hotelRepository.findByCity(city);
     }
 
+    @Override
+    public List<Hotel> getHotelsByManagerId(Long id) {
+        return hotelRepository.findByManagers_Id(id);
+    }
+
     /**
      * Récupère un hôtel par son identifiant.
      * @param id l'identifiant de l'hôtel

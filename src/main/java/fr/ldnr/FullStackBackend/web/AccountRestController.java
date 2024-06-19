@@ -30,6 +30,11 @@ public class AccountRestController {
         return this.accountService.listUsers();
     }
 
+    @GetMapping("/username")
+    public AppUser getUserByUsername(@RequestParam String username) {
+        return accountService.findUserByUsername(username);
+    }
+
     /**
      * Récupère un utilisateur par son identifiant.
      * @param id L'identifiant de l'utilisateur à récupérer.

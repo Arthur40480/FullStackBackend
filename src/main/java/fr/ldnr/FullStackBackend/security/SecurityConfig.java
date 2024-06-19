@@ -48,11 +48,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/hotels").permitAll()
                 .antMatchers(HttpMethod.GET,"/hotels/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/hotel/{id}").permitAll()
+                .antMatchers(HttpMethod.POST,"/hotel").permitAll() // .hasAnyAuthority("ADMIN", "HOTEL_MANAGER")
+                .antMatchers(HttpMethod.DELETE,"/hotel/{id}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/manager/{id}/hotels").permitAll() //.hasAnyAuthority("ADMIN", "HOTEL_MANAGER")
                 .antMatchers(HttpMethod.GET,"/cities").permitAll()
-                .antMatchers(HttpMethod.GET,"//manager/{id}/hotels").permitAll();
+                .antMatchers(HttpMethod.GET,"/city/{id}").permitAll() //.hasAnyAuthority("ADMIN", "HOTEL_MANAGER")
+                .antMatchers(HttpMethod.POST,"/city").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/city/{id}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/users").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/user/{id}").permitAll()  //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/managers").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/managers/{id}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/users").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/user/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/assign/{idUser}/{idHotel}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/remove/{idUser}/{idHotel}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/manager").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/manager/{id}").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/manager/{id}").permitAll(); //.hasAuthority("ADMIN");
+
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));

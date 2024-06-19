@@ -47,9 +47,9 @@ public class FullStackBackendApplication implements CommandLineRunner {
 		iBusiness.saveCity(bordeaux);
 		iBusiness.saveCity(cannes);
 
-		Hotel hotel1 = iBusiness.saveHotel(new Hotel(null, "Hôtel de Crillon","Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.", "0554323457", "15 Rue des Lilas, 75020 Paris", 4, 12,10, 80, "hotel1.jpg", paris, new ArrayList<>()));
-		Hotel hotel2 = iBusiness.saveHotel(new Hotel(null, "Le Bristol Paris", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.", "0559037457", "9 Avenue des artisans, 75020 Paris", 5, 8, 45, 160, "hotel2.jpg", paris, new ArrayList<>()));
-		Hotel hotel3 = iBusiness.saveHotel(new Hotel(null, "L'Escapade Dorée", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0554326636", "14 Impasse de Bretagne, 75020 Paris", 3, 20,6, 45, "hotel3.jpg", paris, new ArrayList<>()));
+		iBusiness.saveHotel(new Hotel(null, "Hôtel de Crillon","Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.", "0554323457", "15 Rue des Lilas, 75020 Paris", 4, 12,10, 80, "hotel1.jpg", paris, new ArrayList<>()));
+		iBusiness.saveHotel(new Hotel(null, "Le Bristol Paris", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.", "0559037457", "9 Avenue des artisans, 75020 Paris", 5, 8, 45, 160, "hotel2.jpg", paris, new ArrayList<>()));
+		iBusiness.saveHotel(new Hotel(null, "L'Escapade Dorée", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0554326636", "14 Impasse de Bretagne, 75020 Paris", 3, 20,6, 45, "hotel3.jpg", paris, new ArrayList<>()));
 
 		iBusiness.saveHotel(new Hotel(null, "Sofitel Vieux-Port", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0554326636", "9 rue du soleil, 13001 Marseille", 2, 20,12, 70, "hotel4.jpg", marseille, new ArrayList<>()));
 		iBusiness.saveHotel(new Hotel(null, "Hôtel Ibis", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0551234636", "10 Place de la République, 13001 Marseille", 5, 5,23, 125, "hotel5.jpg", marseille, new ArrayList<>()));
@@ -69,9 +69,10 @@ public class FullStackBackendApplication implements CommandLineRunner {
 
 		accountService.saveUser(new AppUser(null,"arthur", "1234", new ArrayList<>(), new ArrayList<>()));
 		accountService.saveUser(new AppUser(null,"ambre", "1234", new ArrayList<>(), new ArrayList<>()));
-		AppUser manager1 = accountService.saveUser(new AppUser(null,"pierre", "1234", new ArrayList<>(), new ArrayList<>()));
-		AppUser manager2 = accountService.saveUser(new AppUser(null,"pascale", "1234", new ArrayList<>(), new ArrayList<>()));
-		AppUser manager3 = accountService.saveUser(new AppUser(null,"rogenka", "1234", new ArrayList<>(), new ArrayList<>()));
+		accountService.saveUser(new AppUser(null,"pierre", "1234", new ArrayList<>(), new ArrayList<>()));
+		accountService.saveUser(	new AppUser(null,"pascale", "1234", new ArrayList<>(), new ArrayList<>()));
+		accountService.saveUser(	new AppUser(null,"rogenka", "1234", new ArrayList<>(), new ArrayList<>()));
+
 
 		accountService.saveRole(new AppRole(null,"ADMIN"));
 		accountService.saveRole(new AppRole(null,"USER"));
@@ -80,29 +81,9 @@ public class FullStackBackendApplication implements CommandLineRunner {
 		accountService.addRoleToUser("arthur", "ADMIN");
 		accountService.addRoleToUser("arthur", "USER");
 		accountService.addRoleToUser("ambre", "USER");
-		accountService.addRoleToUser("pierre", "HOTEL_MANAGER");
-		accountService.addRoleToUser("pascale", "HOTEL_MANAGER");
-		accountService.addRoleToUser("rogenka", "HOTEL_MANAGER");
+		accountService.addRoleToUser("pierre", "USER");
+		accountService.addRoleToUser("pascale", "USER");
+		accountService.addRoleToUser("rogenka", "USER");
 
-		manager1.getManagedHotels().add(hotel1);
-		manager1.getManagedHotels().add(hotel2);
-		manager1.getManagedHotels().add(hotel3);
-		hotel1.getManagers().add(manager1);
-		hotel2.getManagers().add(manager1);
-		hotel3.getManagers().add(manager1);
-		
-		manager2.getManagedHotels().add(hotel2);
-		hotel2.getManagers().add(manager2);
-
-		manager3.getManagedHotels().add(hotel3);
-		hotel3.getManagers().add(manager3);
-
-		accountService.saveUser(manager1);
-		accountService.saveUser(manager2);
-		accountService.saveUser(manager3);
-
-		iBusiness.saveHotel(hotel1);
-		iBusiness.saveHotel(hotel2);
-		iBusiness.saveHotel(hotel3);
 	}
 }

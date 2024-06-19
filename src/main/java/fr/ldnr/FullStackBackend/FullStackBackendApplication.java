@@ -3,6 +3,9 @@ package fr.ldnr.FullStackBackend;
 import fr.ldnr.FullStackBackend.business.IBusinessImpl;
 import fr.ldnr.FullStackBackend.entities.City;
 import fr.ldnr.FullStackBackend.entities.Hotel;
+import fr.ldnr.FullStackBackend.security.entities.AppRole;
+import fr.ldnr.FullStackBackend.security.entities.AppUser;
+import fr.ldnr.FullStackBackend.security.service.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,11 +20,15 @@ public class FullStackBackendApplication implements CommandLineRunner {
 	@Autowired
 	IBusinessImpl iBusiness;
 
+	@Autowired
+	AccountServiceImpl accountService;
+
 	public static void main(String[] args) { SpringApplication.run(FullStackBackendApplication.class, args); }
 
 	@Override
 	public void run(String... args) throws Exception {
 		generatedData();
+		generatedUsersRoles();
 	}
 
 	public void generatedData() {
@@ -59,5 +66,18 @@ public class FullStackBackendApplication implements CommandLineRunner {
 		iBusiness.saveHotel(new Hotel(null, "Grand Hyatt Cannes", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0559899636", "12 Rue des Serbes, 06400 Cannes", 2, 9, 105,22, "hotel14.jpg", cannes));
 		iBusiness.saveHotel(new Hotel(null, "Le Majestic Cannes", "Découvrez notre hôtel de luxe niché en bord de mer, offrant des vues imprenables, des suites somptueuses, une cuisine gastronomique et un spa indulgent. Profitez d'un service exceptionnel et d'instants mémorables dans un cadre paradisiaque.","0554376396", "20 Avenue Montaigne, 06400 Cannes", 3, 32, 32,95, "hotel15.jpg", cannes));
 
+	}
+
+	public void generatedUsersRoles() {
+		accountService.saveUser(new AppUser(null,"arthur", "1234", new ArrayList<>()));
+		accountService.saveUser(new AppUser(null,"ambre", "1234", new ArrayList<>()));
+
+		accountService.saveRole(new AppRole(null,"ADMIN"));
+		accountService.saveRole(new AppRole(null,"USER"));
+		accountService.saveRole(new AppRole(null,"HOTEL_MANAGER"));
+
+		accountService.addRoleToUser("arthur", "ADMIN");
+		accountService.addRoleToUser("arthur", "USER");
+		accountService.addRoleToUser("ambre", "USER");
 	}
 }

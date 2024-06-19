@@ -58,6 +58,18 @@ public class IBusinessImpl implements IBusiness {
     }
 
     /**
+     * Récupère une ville par son identifiant et la transforme en CityDTO.
+     * @param id l'identifiant de la ville à récupérer
+     * @return un Optional contenant le DTO de la ville si elle est trouvée, sinon un Optional vide
+     */
+    @Override
+    public Optional<CityDTO> getCityById(Long id) {
+        return cityRepository.findById(id)
+                .map(CityMapper::mapToDto);
+    }
+
+    //------- HOTEL ------
+    /**
      * Sauvegarde un nouvel hôtel ou met à jour un hôtel existant dans le référentiel.
      * @param hotel l'entité Hotel à sauvegarder
      * @return l'entité Hotel sauvegardée

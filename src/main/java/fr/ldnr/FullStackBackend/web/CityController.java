@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -32,6 +33,16 @@ public class CityController {
     public List<CityDTO> getAllCity() {
         logger.info("Récupération de toutes les villes");
         return iBusiness.getAllCity();
+    }
+
+    /**
+     * Récupère une ville par son identifiant.
+     * @param id l'identifiant de la ville à récupérer
+     * @return un Optional contenant le DTO de la ville si elle est trouvée, sinon un Optional vide
+     */
+    @GetMapping("/city/{id}")
+    public Optional<CityDTO> getCityById(@PathVariable("id") Long id) {
+        return iBusiness.getCityById(id);
     }
 
     /**

@@ -4,6 +4,7 @@ import fr.ldnr.FullStackBackend.entities.City;
 import fr.ldnr.FullStackBackend.entities.CityDTO;
 import fr.ldnr.FullStackBackend.entities.Hotel;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ public interface IBusiness {
     CityDTO saveCityDTO(CityDTO cityDTO);
     void deleteCity(Long id);
     List<CityDTO> getAllCity();
+    Optional<CityDTO> getCityById(Long id);
 
     //HOTEL
     Hotel saveHotel (Hotel hotel);

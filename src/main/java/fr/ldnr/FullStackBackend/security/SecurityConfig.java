@@ -1,14 +1,15 @@
 package fr.ldnr.FullStackBackend.security;
 
-
 import fr.ldnr.FullStackBackend.security.entities.AppUser;
 import fr.ldnr.FullStackBackend.security.service.AccountService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AccountService accountService;
@@ -45,7 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/hotels").permitAll()
+                .antMatchers(HttpMethod.GET,"/hotels/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/hotel/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/cities").permitAll();
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));
@@ -53,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -71,4 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             }
         });
     }
+
 }
+

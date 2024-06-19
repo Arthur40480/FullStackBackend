@@ -19,36 +19,36 @@ public class AccountRestController {
 
     /**
      * Récupère la liste de tous les utilisateurs.
-     * @return une réponse HTTP contenant la liste de tous les utilisateurs.
+     * @return ResponseEntity contenant la liste des utilisateurs.
      */
     @GetMapping("/users")
-    ResponseEntity<List<AppUser>> getUsers() {
+    ResponseEntity<List<AppUser>> getUsers(){
         return this.accountService.listUsers();
     }
 
     /**
-     * Ajoute un nouvel utilisateur.
-     * @param user l'utilisateur à ajouter.
-     * @return l'utilisateur ajouté.
+     * Enregistre un nouvel utilisateur.
+     * @param user Utilisateur à enregistrer.
+     * @return L'utilisateur enregistré.
      */
     @PostMapping("/users")
-    public AppUser postUser(@RequestBody AppUser user) {
+    public AppUser postUser(@RequestBody AppUser user){
         return this.accountService.saveUser(user);
     }
 
     /**
-     * Ajoute un nouveau rôle.
-     * @param role le rôle à ajouter.
-     * @return le rôle ajouté.
+     * Enregistre un nouveau rôle.
+     * @param role Rôle à enregistrer.
+     * @return Le rôle enregistré.
      */
     @PostMapping("/role")
-    public AppRole postRole(@RequestBody AppRole role) {
+    public AppRole postRole(@RequestBody AppRole role){
         return this.accountService.saveRole(role);
     }
 
     /**
      * Associe un rôle à un utilisateur.
-     * @param userRoleForm le formulaire contenant le nom d'utilisateur et le nom du rôle.
+     * @param userRoleForm Formulaire contenant le nom de l'utilisateur et le nom du rôle.
      */
     @PostMapping("/roleUser")
     public void postRoleToUser(@RequestBody UserRoleForm userRoleForm) {
@@ -57,7 +57,7 @@ public class AccountRestController {
 }
 
 /**
- * Formulaire de transfert pour associer un rôle à un utilisateur.
+ * Classe pour représenter le formulaire d'association d'un rôle à un utilisateur.
  */
 @Data
 class UserRoleForm {

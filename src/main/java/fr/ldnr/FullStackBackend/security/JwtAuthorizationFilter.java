@@ -26,6 +26,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
         response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, Authorization");
+
         if(token != null && token.startsWith(SecurityConstants.TOKEN_PREFIX)){
             try {
                 String jwtToken = token.substring(7);
@@ -47,3 +48,4 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request,response);
     }
 }
+
